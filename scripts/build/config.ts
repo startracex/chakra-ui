@@ -29,6 +29,7 @@ export async function getConfig(options: Options): Promise<RollupOptions> {
       sourceMap: true,
       tsconfig: resolve(dir, "tsconfig.json"),
       platform: isCli ? "node" : "browser",
+      jsx: "automatic",
     }),
     replace({ preventAssignment: true }),
     preserveDirectives(),
