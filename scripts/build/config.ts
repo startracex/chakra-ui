@@ -3,6 +3,7 @@ import { nodeResolve } from "@rollup/plugin-node-resolve"
 import replace from "@rollup/plugin-replace"
 import glob from "fast-glob"
 import { resolve } from "node:path"
+import { pathToFileURL } from "node:url"
 import { Plugin, RollupOptions } from "rollup"
 import esbuild from "rollup-plugin-esbuild"
 import { preserveDirectives } from "rollup-plugin-preserve-directives"
@@ -15,7 +16,9 @@ interface Options {
 export async function getConfig(options: Options): Promise<RollupOptions> {
   const { dir, aliases } = options
 
-  const packageJson = await import(resolve(dir, "package.json"))
+  const packageJson = await import(
+    pathToFileURL(resolve(dir, "package.json")).href
+  )
 
   const isCli = packageJson.bin !== undefined
 

@@ -1,4 +1,5 @@
-import { resolve } from "path/posix"
+import { resolve } from "path"
+import { pathToFileURL } from "url"
 import { buildProject } from "./build.js"
 
 async function main() {
@@ -7,8 +8,9 @@ async function main() {
   const watch = flags.includes("--watch")
   const clean = flags.includes("--clean")
   const dts = flags.includes("--dts")
-
-  const packageJson = await import(resolve(cwd, "package.json"))
+  const packageJson = await import(
+    pathToFileURL(resolve(cwd, "package.json")).href
+  )
 
   await buildProject({
     dir: cwd,
