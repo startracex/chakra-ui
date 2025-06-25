@@ -1,5 +1,147 @@
 # @chakra-ui/react
 
+## 3.21.0
+
+### Minor Changes
+
+- [`3df43ba`](https://github.com/chakra-ui/chakra-ui/commit/3df43bab4e98af6cabc4f7e199e38c4b8ec11bbe)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - Add support new
+  entrypoint for `/theme` which allows for incremental loading of component
+  recipes to avoid bloating the theme with unused components.
+
+  > This is mostly for bundle size optimization.
+
+  For example, if you want just the `button` recipe to be included in your
+  bundle, you can cherry-pick the recipe you need like this:
+
+  ```tsx
+  import { createSystem, defaultBaseConfig } from "@chakra-ui/react"
+  import { buttonRecipe } from "@chakra-ui/react/theme"
+
+  export const system = createSystem(defaultBaseConfig, {
+    theme: {
+      recipes: {
+        button: buttonRecipe,
+      },
+    },
+  })
+  ```
+
+### Patch Changes
+
+- [`010f256`](https://github.com/chakra-ui/chakra-ui/commit/010f256d74de2e48283d1f714c6094a4045bcbdd)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - - **File Upload**:
+  Prevented `undefined` in `acceptedFiles` when no files accepted
+
+  - **Select**: Fixed issue where highlighted item could be cleared when
+    navigating up/down the list with keyboard
+  - **Tabs**: Fixed issue where tabs with links should not trigger tab change
+    upon cmd/middle click
+  - **Menu**: Fixed issue where `Menu.ItemText` could not be used with
+    `Menu.Item`
+
+## 3.20.0
+
+### Minor Changes
+
+- [`65020dd`](https://github.com/chakra-ui/chakra-ui/commit/65020dd159a8cfa0eebafd60afb98e971a7ee377)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - - **System**: Allow
+  `undefined` for optional properties in CSS and recipe types
+
+  - **Color Picker**: Fixed issue where value change end event is invoked when
+    committing via an input.
+  - **Toast**: Fixed issue where calling `toast.remove()` without an id shows a
+    TypeScript error.
+  - **Field**: Fixed issue where helper text and error text could not be
+    detected in shadow DOM environments.
+  - **Slider**
+
+    - Fixed issue where `minStepsBetweenThumbs` isn't computed correctly when
+      interacting with pointer or keyboard.
+    - Fixed issue where `Shift` + `ArrowRight` set value to `0` instead of `max`
+      when step is too large (e.g. `20`).
+    - Fixed issue where `onValueChangeEnd` doesn't return the latest value when
+      dragging very fast.
+    - Fixed issue where slider could throw a error when rendered in an popover
+      or dialog.
+
+  - **File Upload**: Added support for transforming uploaded files via
+    `transformFiles` context property.
+  - **Combobox**: Fixed issue where `onInputValueChange` doesn't get called when
+    `autoFocus` is set to `true`
+  - **Pin Input**: Fixed issue where input padding could cause clipping of the
+    text when `fontSize` is increased.
+
+### Patch Changes
+
+- [#10081](https://github.com/chakra-ui/chakra-ui/pull/10081)
+  [`c2f650b`](https://github.com/chakra-ui/chakra-ui/commit/c2f650bd0c3e4a137fa3622a94aace398e69f483)
+  Thanks [@isBatak](https://github.com/isBatak)! - - export
+  `CheckboxRootProviderProps` type
+
+- [#10075](https://github.com/chakra-ui/chakra-ui/pull/10075)
+  [`63c267f`](https://github.com/chakra-ui/chakra-ui/commit/63c267fe2ef8aa0db707b5932dddbf4db2d54e40)
+  Thanks [@isBatak](https://github.com/isBatak)! - - export `Quote` typography
+  component and its types
+
+## 3.19.2
+
+### Patch Changes
+
+- [#10059](https://github.com/chakra-ui/chakra-ui/pull/10059)
+  [`a289c3c`](https://github.com/chakra-ui/chakra-ui/commit/a289c3c928bc83f2550e374af17068afaed69858)
+  Thanks [@isBatak](https://github.com/isBatak)! - - **System**: add explicit
+  `undefined` to generated types to support TS `exactOptionalPropertyTypes`
+
+- [#10064](https://github.com/chakra-ui/chakra-ui/pull/10064)
+  [`10d0a8e`](https://github.com/chakra-ui/chakra-ui/commit/10d0a8ed2be50c52786f7c9ba4d0edbbbc87c0e0)
+  Thanks [@mhsattarian](https://github.com/mhsattarian)! - - **Drawer**: Fix
+  drawer close animation in RTL
+
+  - **Button**
+    - Fix layout issue when in loading state with icons by using
+      `display: contents` and `visibility: hidden`
+    - Add `data-loading` attribute when `loading` is `true` so allow styling
+      loading state with `_loading` pseudo prop
+
+## 3.19.1
+
+### Patch Changes
+
+- [`aa9c2b0`](https://github.com/chakra-ui/chakra-ui/commit/aa9c2b02e455697221b691aca54a82dcf5604fb8)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - - **System**: Fix
+  issue where some svg element props tend to be treated as style props
+
+  - **Checkbox**: Use consistent cursor for checkbox and radio group
+
+## 3.19.0
+
+### Minor Changes
+
+- [#9464](https://github.com/chakra-ui/chakra-ui/pull/9464)
+  [`d860d48`](https://github.com/chakra-ui/chakra-ui/commit/d860d48cf7d547bfe3970e10ec49b9c7aa5d98b8)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - - **[New]
+  Combobox** Add combobox component for autocomplete text entry.
+
+  - **Progress Circle**: Make progress circle transition smoother.
+
+## 3.18.0
+
+### Minor Changes
+
+- [`e91ec7e`](https://github.com/chakra-ui/chakra-ui/commit/e91ec7e9a393a791743636e934d28bc75a0e6dc8)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - - **DownloadTrigger
+  [New]** Add `DownloadTrigger` component to help download file contents.
+
+  - **System**
+
+    - Fix issue where passing `d` prop to `chakra.path` adds it to styles not as
+      a direct attribute.
+    - Fix issue where responsive semantic tokens did not get applied.
+
+  - **Select**: Fix issue where indicator group doesn't align correctly in RTL
+    layouts.
+
 ## 3.17.0
 
 ### Minor Changes
