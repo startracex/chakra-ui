@@ -6,7 +6,7 @@ type ImportantMark = "!" | "!important"
 type WhitespaceImportant = ` ${ImportantMark}`
 type Important = ImportantMark | WhitespaceImportant
 
-type WithImportant<T> = T extends string ? `${T}${Important}` & { __important?: true | undefined } : T
+type WithImportant<T> = T extends string ? `${T}${Important}` & { __important?: true } : T
 
 export type WithEscapeHatch<T> = T | `[${string}]` | WithColorOpacityModifier<T> | WithImportant<T>
 // eslint-disable-next-line
@@ -223,6 +223,9 @@ export interface UtilityValues {
   letterSpacing: Tokens["letterSpacings"]
   textIndent: Tokens["spacing"]
   truncate: boolean
+  borderSpacing: Tokens["spacing"] | "auto"
+  borderSpacingX: Tokens["spacing"]
+  borderSpacingY: Tokens["spacing"]
   srOnly: boolean
   debug: boolean
   caretColor: Tokens["colors"] | "currentBg"

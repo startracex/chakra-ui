@@ -469,6 +469,37 @@ export type CheckboxCardVariantMap = {
   [K in keyof CheckboxCardVariant]: Array<CheckboxCardVariant[K]>
 }
 
+// CodeBlock
+
+export type CodeBlockSlot =
+  | "root"
+  | "content"
+  | "title"
+  | "header"
+  | "footer"
+  | "control"
+  | "overlay"
+  | "code"
+  | "codeText"
+  | "copyTrigger"
+  | "copyIndicator"
+  | "collapseTrigger"
+  | "collapseIndicator"
+  | "collapseText"
+
+export interface CodeBlockVariant {
+  /** @default "md" */
+  size?: "sm" | "md" | "lg" | undefined
+}
+
+export type CodeBlockVariantProps = {
+  [K in keyof CodeBlockVariant]?: ConditionalValue<CodeBlockVariant[K]> | undefined
+}
+
+export type CodeBlockVariantMap = {
+  [K in keyof CodeBlockVariant]: Array<CodeBlockVariant[K]>
+}
+
 // Collapsible
 
 export type CollapsibleSlot = "root" | "trigger" | "content" | "indicator"
@@ -1310,6 +1341,40 @@ export type QrCodeVariantMap = {
   [K in keyof QrCodeVariant]: Array<QrCodeVariant[K]>
 }
 
+// TreeView
+
+export type TreeViewSlot =
+  | "branch"
+  | "branchContent"
+  | "branchControl"
+  | "branchIndentGuide"
+  | "branchIndicator"
+  | "branchText"
+  | "branchTrigger"
+  | "item"
+  | "itemIndicator"
+  | "itemText"
+  | "label"
+  | "nodeCheckbox"
+  | "root"
+  | "tree"
+
+export interface TreeViewVariant {
+  /** @default "md" */
+  size?: "md" | "sm" | "xs" | undefined
+  /** @default "subtle" */
+  variant?: "subtle" | "solid" | undefined
+  animateContent?: boolean | undefined
+}
+
+export type TreeViewVariantProps = {
+  [K in keyof TreeViewVariant]?: ConditionalValue<TreeViewVariant[K]> | undefined
+}
+
+export type TreeViewVariantMap = {
+  [K in keyof TreeViewVariant]: Array<TreeViewVariant[K]>
+}
+
 export interface ConfigSlotRecipes {
   accordion: SystemSlotRecipeFn<AccordionSlot, AccordionVariantProps, AccordionVariantMap>
   actionBar: SystemSlotRecipeFn<ActionBarSlot, ActionBarVariantProps, ActionBarVariantMap>
@@ -1320,6 +1385,7 @@ export interface ConfigSlotRecipes {
   card: SystemSlotRecipeFn<CardSlot, CardVariantProps, CardVariantMap>
   checkbox: SystemSlotRecipeFn<CheckboxSlot, CheckboxVariantProps, CheckboxVariantMap>
   checkboxCard: SystemSlotRecipeFn<CheckboxCardSlot, CheckboxCardVariantProps, CheckboxCardVariantMap>
+  codeBlock: SystemSlotRecipeFn<CodeBlockSlot, CodeBlockVariantProps, CodeBlockVariantMap>
   collapsible: SystemSlotRecipeFn<CollapsibleSlot, CollapsibleVariantProps, CollapsibleVariantMap>
   dataList: SystemSlotRecipeFn<DataListSlot, DataListVariantProps, DataListVariantMap>
   dialog: SystemSlotRecipeFn<DialogSlot, DialogVariantProps, DialogVariantMap>
@@ -1357,6 +1423,7 @@ export interface ConfigSlotRecipes {
   timeline: SystemSlotRecipeFn<TimelineSlot, TimelineVariantProps, TimelineVariantMap>
   colorPicker: SystemSlotRecipeFn<ColorPickerSlot, ColorPickerVariantProps, ColorPickerVariantMap>
   qrCode: SystemSlotRecipeFn<QrCodeSlot, QrCodeVariantProps, QrCodeVariantMap>
+  treeView: SystemSlotRecipeFn<TreeViewSlot, TreeViewVariantProps, TreeViewVariantMap>
 }
 
 export interface ConfigRecipeSlots {
@@ -1369,6 +1436,7 @@ export interface ConfigRecipeSlots {
   card: CardSlot
   checkbox: CheckboxSlot
   checkboxCard: CheckboxCardSlot
+  codeBlock: CodeBlockSlot
   collapsible: CollapsibleSlot
   dataList: DataListSlot
   dialog: DialogSlot
@@ -1406,6 +1474,7 @@ export interface ConfigRecipeSlots {
   timeline: TimelineSlot
   colorPicker: ColorPickerSlot
   qrCode: QrCodeSlot
+  treeView: TreeViewSlot
 }
 
 export type SlotRecipeRecord<T, K> = T extends keyof ConfigRecipeSlots ? Record<ConfigRecipeSlots[T], K> : Record<string, K>
@@ -1414,4 +1483,6 @@ export type SlotRecipeProps<T> = T extends keyof ConfigSlotRecipes
   ? ConfigSlotRecipes[T]["__type"] & { recipe?: SlotRecipeDefinition | undefined }
   : { recipe?: SlotRecipeDefinition | undefined }
 
-export type RecipeProps<T> = T extends keyof ConfigRecipes ? ConfigRecipes[T]["__type"] & { recipe?: RecipeDefinition | undefined } : { recipe?: RecipeDefinition | undefined }
+export type RecipeProps<T> = T extends keyof ConfigRecipes
+  ? ConfigRecipes[T]["__type"] & { recipe?: RecipeDefinition | undefined }
+  : { recipe?: RecipeDefinition | undefined }
